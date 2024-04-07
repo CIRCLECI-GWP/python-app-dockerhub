@@ -18,9 +18,7 @@ jobs:
 
       - run:
           name: Test with pytest
-          command: |
-            . venv/bin/activate
-            pytest
+          command: pytest
 
 workflows:
   build-master:
