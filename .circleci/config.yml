@@ -1,12 +1,14 @@
 version: 2.1
+orbs:
+  python: circleci/python@2.1.1
 jobs:
-  build:
+  build-and-test:
     docker:
       - image: cimg/python:3.12.2
     steps:
       - checkout
-      - run:
-          name: Install pip packages
+      - python/install-packages:
+          pkg-manager: pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
