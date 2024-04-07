@@ -22,32 +22,21 @@ jobs:
           name: Test with pytest
           command: pytest
 
+  deploy:
+    docker:
+      - image: cimg/base:2024.02
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+      - run:
+          name: Build and push to Docker Hub
+          command: |
+            docker build -t $DOCKER_HUB_USER_ID/$IMAGE_NAME:latest .
+            echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER_ID" --password-stdin
+            docker push $DOCKER_HUB_USER_ID/$IMAGE_NAME:latest
+
 workflows:
   build-master:
     jobs:
       - build-and-test
-# version: '2.1'
-# orbs:
-#   python: circleci/python@1.1.0
-# jobs:
-#   build:
-#     executor: python/default
-#     steps:
-#       - checkout
-#       - python/install-packages:
-#           pkg-manager: pip
-#       - python/install-packages:
-#           pip-dependency-file: dev-requirements.txt
-#           pkg-manager: pip
-# - python/install-packages:
-#     args: pytest
-#     pkg-manager: pip
-#     pypi-cache: false
-#       - run:
-#           command: |
-#             pytest --version
-#           name: Test
-# workflows:
-#   main:
-#     jobs:
-# - build
