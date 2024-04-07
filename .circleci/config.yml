@@ -14,7 +14,10 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-
+      - python/install-packages:
+          args: pytest
+          pkg-manager: pip
+          pypi-cache: false
       - run:
           name: Test with pytest
           command: pytest
@@ -36,10 +39,10 @@ workflows:
 #       - python/install-packages:
 #           pip-dependency-file: dev-requirements.txt
 #           pkg-manager: pip
-#       - python/install-packages:
-#           args: pytest
-#           pkg-manager: pip
-#           pypi-cache: false
+# - python/install-packages:
+#     args: pytest
+#     pkg-manager: pip
+#     pypi-cache: false
 #       - run:
 #           command: |
 #             pytest --version
