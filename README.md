@@ -26,12 +26,6 @@ Install the dependencies using the following command:
 pip3 install -r requirements.txt
 ```
 
-## Running tests
-
-```bash
-pytest
-```
-
 ## Details
 
 This repo is built following a tutorial published on CircleCI blog under the CircleCI Guest Writer Program.
