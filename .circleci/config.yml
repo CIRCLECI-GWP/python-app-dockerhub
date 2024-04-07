@@ -3,8 +3,7 @@ orbs:
   python: circleci/python@2.1.1
 jobs:
   build-and-test:
-    docker:
-      - image: cimg/python:3.12.2
+    executor: python/default
     steps:
       - checkout
       - python/install-packages:
@@ -24,3 +23,28 @@ workflows:
   build-master:
     jobs:
       - build-and-test
+# version: '2.1'
+# orbs:
+#   python: circleci/python@1.1.0
+# jobs:
+#   build:
+#     executor: python/default
+#     steps:
+#       - checkout
+#       - python/install-packages:
+#           pkg-manager: pip
+#       - python/install-packages:
+#           pip-dependency-file: dev-requirements.txt
+#           pkg-manager: pip
+#       - python/install-packages:
+#           args: pytest
+#           pkg-manager: pip
+#           pypi-cache: false
+#       - run:
+#           command: |
+#             pytest --version
+#           name: Test
+# workflows:
+#   main:
+#     jobs:
+# - build
