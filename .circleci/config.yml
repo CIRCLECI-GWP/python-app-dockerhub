@@ -40,3 +40,6 @@ workflows:
   build-master:
     jobs:
       - build-and-test
+      - deploy:
+          requires:
+            - build-and-test
